@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<link rel="stylesheet" href="css/common.css" />
+		<link rel="stylesheet" href="css/index.css" />
+		<link rel="stylesheet" href="js/bootstrap-3.4.1-dist/css/bootstrap.min.css" />
+		<script type="text/javascript" src="js/jquery-1.11.0.js" ></script>
+		<script type="text/javascript" src="js/bootstrap-3.4.1-dist/js/bootstrap.min.js"></script>
+		<script type="text/javascript" src="js/common.js" ></script>
+		<script type="text/javascript" src="js/index.js" ></script>
+		<script type="text/javascript" src="js/menu.js" ></script>
+		<script type="text/javascript" src="js/data.js" ></script>
+		<script>
+			//走进该页面,证明用户登陆成功
+			//为当前登录的用户兑现赋值
+			//得到当前登录的用户的用户编号
+			var loginUserId = getParam("loginUserId")
+			//c从employeeJsonArray 数组中找到与当前一致的员工信息
+			for(var i = 0 ;i<employeeJsonArray.length;i++){
+				var employee = employeeJsonArray[i];
+				if(employee != undefined && employee.id == loginUserId){
+					loginUser = employee;
+					break;
+				}
+			}
+			alert(loginUser.name)
+		</script>
+	</head>
+	<body>
+		<!--首页头部部分-->
+		<header>
+			<!--头部logo图片-->
+			<img src="img/会议.png" />
+			<!--SmartMeeting会议管理系统显示区域-->
+			<span style="font-weight:bold;line-height:44px;font-size:18px;font-family:'Britannic Bold';color:#fff0f6;">SmartMeeting</span>
+			<span style="font-weight:bold;line-height:44px;font-size:18px;font-family:'Segoe UI Emoji Bold';color:#fff0f6;">会议管理系统</span>
+			
+			<!--头部右侧区域-->
+			<div class="headerRight">
+				<span id="loginSpan">欢迎登录，sunys</span>
+				<img style="margin-left:20px;" src="img/StatBar_time.gif" />
+				<!--展现当前系统时间区域-->
+				<span id="nowTime"></span>
+				&nbsp;&nbsp;&nbsp;&nbsp;
+				<a href="#">修改密码</a>
+				&nbsp;&nbsp;
+				<a href="#">退出登录</a>
+			</div>
+		</header>
+		
+		<!--首页主体部分，采用bootstrap栅格-->
+		<div class="container-fluid">    
+		    <div class="row">
+		    	<!--左侧菜单栏区域，占位2列-->
+		        <div style=" margin:0;padding:0;" class="col-md-2 left">
+		        	<!--菜单栏区域采用ul无序列表的形式-->
+			        <ul class="menu">
+			            <li class="active">
+			            	<a href="#" style="margin-right: 50px;">个人通知</a>
+			            	<span class="glyphicon glyphicon-menu-right"></span>
+			            	<ul class="sub-menu">
+				               <li><a class="subactive" href="#">最新通知</a></li>
+				               <li><a href="#">我的预定</a></li>
+				               <li><a href="#">我的会议</a></li>
+				            </ul>
+			            </li>
+			            <li>
+			            	<a href="#" style="margin-right: 50px;">人员管理</a>
+			            	<span class="glyphicon glyphicon-menu-right"></span>
+			            	<ul class="sub-menu"> 
+								<li><a href="#" id="deptSearch" onclick="deptSearch()">部门管理</a></li>				               
+								<li><a href="#" id="registerNew" onclick="registerNew()">员工注册</a></li>
+				                <li><a href="#" id="approveStaff " onclick="approveStaff()">注册审批</a></li>
+				                <li><a href="#" id="staffList" onclick="staffList()">搜索员工</a></li>
+				            </ul>
+			            </li>
+			            <li>
+			            	<a href="#" style="margin-right: 50px;">会议预定</a>
+			            	<span class="glyphicon glyphicon-menu-right"></span>
+			            	<ul class="sub-menu">
+				               <li><a href="#">添加会议室</a></li>
+				               <li><a href="#">查看会议室</a></li>
+							   <li><a href="#" id="preMeeting" onclick="preMeeting()">预定会议</a></li>				            
+				               <li><a href="#">搜索会议</a></li>
+				            </ul>
+			            </li>
+			            
+			        </ul>
+		        </div>
+<!-- 以上内容是目录 -->		        
+		        <!--右侧主体区域，占位10列-->
+		        <div class="col-md-10 main" style="padding:0;">
+		            <iframe width="100%" height="650px" style="border: none;" id="myFrame" name="myFrame"></iframe>
+		        </div>
+		    </div>
+		</div>
+
+	</body>
+</html>

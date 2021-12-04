@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script type="text/javascript" src="../js/jquery-1.11.0.js" ></script>
+		<script type="text/javascript" src="../js/common.js" ></script>
+		<!--选择参会人员区域的相关样式-->
+		<style type="text/css">
+            #divfrom{
+                float:left;
+                width:150px;
+            }
+            #divto{
+                float:left;
+                width:150px;
+            }
+            #divoperator{
+                float:left;
+                width:50px;
+                padding:60px 5px;
+            }
+            #divoperator input[type="button"]{
+                margin:10px 0;
+            }
+            #selDepartments{
+                display:block;
+                width:100%;
+            }
+            #selEmployees{
+                display:block;
+                width:100%;
+                height:200px;
+            }
+            #selSelectedEmployees{
+                display:block;
+                width:100%;
+                height:225px;
+            }
+        </style>
+        <script type="application/javascript">
+			var meetingroomJsonArray = window.parent.meetingroomJsonArray;
+			
+			//定义初始化会议数据
+			var meetingJsonArray =  window.parent.meetingJsonArray;  
+			 
+			var deptJsonArray = window.parent.deptJsonArray;
+			 
+			var employeeJsonArray = window.parent.employeeJsonArray;   
+			
+			//当页面加载完成后,生成会议室列表下拉框
+			$(function(){
+				//向id="mid"的 select标签中追加option选项
+				for(var i=0; i<meetingroomJsonArray.length;i++){
+					var meetingroom = meetingroomJsonArray[i];
+					//&& meetingroom.id ==
+					if(meetingroom!=undefined && meetingroom.status == "1" ){ 
+						var optionstr = "<option value='"+meetingroom.id+"'>"+meetingroom.name+"</option>";
+						$("#mid").append(optionstr);
+					}
+				
+				}
+			});
+			
+			
+            /*选择参会人员的动态变化JS*/
+            //定义初始化部门测试数据
+      
+ 
+			
+            function body_load(){//当页面加载时触发执行
+                //首先生成部门下拉选项
+                for(var i=0;i<deptJsonArray.length;i++){
+                	var dept = deptJsonArray[i];
+                	if(dept!=undefined){
+						//转变成自己数据
+                		$("#selDepartments").append("<option value='"+dept.did+"'>"+dept.dname+"</option>");
+                	}
+                }
+                fillEmployees();//根据选中的部门生成员工列表下拉框
+            }
+            
+            //根据选中的部门生成员工列表下拉框
+            function fillEmployees(){
+                $("#selEmployees").html("");//先清空该下拉框
+                //获取选中的部门下拉框
+                var deptid = $("#selDepartments").val();
+                for(i=0;i<employeeJsonArray.length;i++){
+                    var employee = employeeJsonArray[i];
+                	if(employee!=undefined && employee.depid==deptid){
+                		$("#selEmployees").append("<option value='"+employee.id+"'>"+employee.name+"</option>");
+                	}
+                }
+            }
+            
+            //点击选择该员工进行参会的按钮触发的事件
+            function selectEmployees(){
+            	//获取得到所有的选中的员工列表
+            	var selectedEmps = $("#selEmployees>option:selected");
+                for(var i=0;i<selectedEmps.length;i++){//将选中的员工追加到右侧的员工列表区域
+                	var selectedEmp = selectedEmps[i];
+                	//首先判断该员工原来是否有出现在右侧区域中
+                	//初始化定义并未出现过
+                	var flag = true;
+                	var selSelectedEmployees = $("#selSelectedEmployees option");
+                	for(var j=0;j<selSelectedEmployees.length;j++){
+                		var selSelectedEmployee = selSelectedEmployees[j];
+                		if($(selSelectedEmployee).val()==$(selectedEmp).val()){
+                			flag = false;
+                			break;
+                		}
+                	}
+                	if(flag){
+                		$("#selSelectedEmployees").append("<option value='"+$(selectedEmp).val()+"'>"+$(selectedEmp).text()+"</option>");
+                	}
+                }
+            }
+            
+            //点击取消选择该员工进行参会的按钮触发的事件
+            function deSelectEmployees(){
+                //获取得到所有的选中的想要取消参加会议的员工列表
+                var selSelectedEmployees = $("#selSelectedEmployees>option:selected");
+                for(var i=0;i<selSelectedEmployees.length;i++){
+                	$(selSelectedEmployees[i]).remove();
+                }
+            }
+			
+			function realPre(){
+				//获取用户输入的会议信息
+				//创建会议对象,添加到会议信息列表中
+				var title = $("#title").val();
+				var num =$("#nume").val();
+				var starttime =$("#starttime").val();
+				var endtime =$("#endtime").val();
+				var mid =$("#mid").val();   //当选中下拉框后,会议室信息
+				var remark =$("#remark").val(); 
+				//获取得到所有选中的参会人员的人员编号,多个人员用逗号隔开
+				var participants=getparticipants();
+				//验证该会议室是否被占用
+				if(checkIsUsed(mid,starttime,endtime)){
+					alert("可以添加")
+					//创建一个meeting的json对象,存放在数组中,与添加部门一样
+				}else{
+					alert("该会议室在此时间内被占用,请重新选择!")
+				}
+			}
+            
+			//实现获取得到所有的选中的参会人员的人员编号
+			function getparticipants(){
+				var participants = "";
+				//得到右侧区域标签对象
+				var selSelectedEmployees = $("#selSelectedEmployees")
+				for(var i=0;i<selSelectedEmployees.length;i++){
+					var selSelectedEmp = selSelectedEmployees[i];  //当前循环便利的option标签
+					participants += $(selSelectedEmp).val()+",";  //得到所有选中的value值并且用逗号拼接
+					
+				}
+			}
+			//验证会议室是否被占用
+			function checkIsUsed(mid,starttime,endtime){
+				//需要和会议列表中每一条会议信息进行比对
+				//如果会议列表中所占用的会议室是当前需要使用的会议室,
+				//则需要对时间范围进行匹配
+				for(var i=0; i<meetingJsonArray.length;i++)
+				var meeting = meetingJsonArray[i];
+				if(meeting!=undefined && meeting.mid == mid && meeting.status == "1"){
+					//验证时间范围是否存在冲突
+					var pre_starttime = new Date(starttime.replaceAll("-","/"));  //将-转换为/  转换为日期形式
+					var pre_endtime = new Date(endtime.replaceAll("-","/"));
+					var meet_starttime = new Date(meeting.starttime.replaceAll("-","/"));
+					var meet_endtime = new Date(meeting.endtime.replaceAll("-","/"));
+					alert(pre_starttime);
+					alert(pre_endtime);
+					alert(meet_starttime);
+					alert(meet_endtime);
+					/*
+					正在预定会议的时间范围在9.30-11.30
+					1)08.00 - 11:00
+					起始时间在已预定的起始和结束时间范围内
+					2)10.00-12.00
+					结束时间在已预定的起始和结束时间范围内
+					3)08.00-12.00
+					13.00-16.00
+					meet_start = 13.00 meet_end = 16.00
+					pre_start = 14.00  pre_end = 15.
+					4)10.00-12.00
+					*/
+				   if(pre_starttime >= meet_starttime && pre_starttime <meet_endtime){
+					   return false;
+				   }
+				   if(pre_endtime > meet_starttime && pre_endtime <=meet_endtime){
+					   return false;
+				   }
+				   if(meet_endtime >pre_starttime && meet_endtime <=pre_endtime){
+						return false;
+				   }
+				   if(meet_starttime >= pre_starttime && meet_starttime <pre_endtime){
+				   		return false;
+				   }
+				   return true;
+				}
+			}
+                 
+        </script>
+	</head>
+	<body onload="body_load()">
+		<!--预定的form表单-->
+		<form>
+			<div style="margin:50px;">
+				会议名称：<input type="text" id="title" />
+				<br/><br/>
+				预计参加人数：<input type="text" id="num" />
+				<br/><br/>
+				预计开始时间：<input type="text" id="starttime" />
+				<br/><br/>
+				预计结束时间：<input type="text" id="endtime" />
+				<br/><br/>
+				会议室：<select id="mid"> <!-- //下拉框 -->
+			<!-- 		<option>第一会议室</option>
+					<option>第二会议室</option>
+					<option>第三会议室</option> -->
+					</select> 
+				<br/><br/>
+				会议说明：<input type="text" id="remark" />
+				<br/><br/>
+				<div style="height: 200px;">
+					<div style="float: left;">选择参会人员：</div>
+					<div id="divfrom">
+	                    <select id="selDepartments" onchange="fillEmployees()">
+	                    </select>
+	                    <select id="selEmployees" multiple="true">
+	                     </select>
+	                </div>
+	                <div id="divoperator">
+	                    <input type="button" class="clickbutton" value="&gt;" onclick="selectEmployees()"/>
+	                    <input type="button" class="clickbutton" value="&lt;" onclick="deSelectEmployees()"/>
+	                </div>
+	                <div id="divto">
+	                    <select id="selSelectedEmployees" multiple="true">
+	                    </select>
+	                </div>
+        		</div>
+				<br /><br /><br />
+				<input type="button" value="预定" onclick="realPre()" />
+				&nbsp;&nbsp;&nbsp;&nbsp;
+				<input type="reset" value="取消"  />
+			</div>
+		</form>
+	</body>
+</html>

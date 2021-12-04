@@ -1,0 +1,25 @@
+.loginDiv{
+	width: 350px;
+	height: 230px;
+	background: #F6CEE3;
+	margin: 150px auto;
+	border-radius: 10px;
+}
+/*找到class=loginInp 添加样式*/
+.loginInp{
+	width: 280px;
+    height: 25px;
+    border-radius: 5px;
+}
+/*登录取消按钮样式*/
+.btn{
+	width: 140px;
+    height: 40px;
+    background: #58ACFA;
+    color: whitesmoke;
+    border: none;
+    border-radius: 5px;
+}
+.loginTable{
+	line-height: 30px;
+}

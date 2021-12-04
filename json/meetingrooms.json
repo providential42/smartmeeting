@@ -1,0 +1,26 @@
+[
+	{
+		"id":1,
+		"housenum":"101",
+		"name":"第一会议室",
+		"capacity":"100",
+		"remark":"第一会议室描述",
+		"status":"1"
+	},
+	{		
+		"id":2,
+		"housenum":"102",
+		"name":"第二会议室",
+		"capacity":"50",
+		"remark":"第二会议室描述",
+		"status":"1"
+	},
+	{
+		"id":3,
+		"housenum":"103",
+		"name":"第三会议室",
+		"capacity":"50",
+		"remark":"第三会议室描述",
+		"status":"1"
+	}
+]

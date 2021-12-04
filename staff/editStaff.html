@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script type="text/javascript" src="../js/jquery-1.11.0.js" ></script>
+		<script type="text/javascript" src="../js/common.js" ></script>
+		<script type="text/javascript" src="../js/staff/editStaff.js" ></script>
+
+	</head>
+	<body onload="body_load()">
+		<!--添加人员的form表单-->
+		<form>
+			<div style="margin:50px;">
+				姓 名：<input type="text" id="name" />
+				性 别：<input type="text" id="sex" />
+				民 族：<input type="text" id="race" />
+				<br /><br />
+				身份证：<input type="text" id="cardid" />
+				政治面貌：<input type="text" id="party" />
+				<br /><br />
+				学 历：<input type="text" id="education" /> 
+				专 业：<input type="text" id="speciality" />
+				<br /><br />
+				手机号（账号）：<input type="text" id="phone" /> 
+				密 码：<input type="text" id="password" />
+				<br /><br />
+				邮 箱：<input type="text" id="email" />
+				家庭电话：<input type="text" id="tel" />
+				<br /><br />
+				家庭住址：<input type="text" id="address" />
+				邮政编码：<input type="text" id="postcode" />
+				<br /><br />
+				Q Q 号：<input type="text" id="qqnum" />
+				生 日：<input type="text" id="birthday" />
+				<br /><br />
+				所属部门：<select id="depid">
+				</select>
+				所属薪资范围：<select id="levelid">
+					<option value = 1>3k-5k</option>
+					<option value = 2>5k-8k</option>
+					<option value = 3>8k-12k</option>
+					<option value = 4>12k-15k</option>
+					<option value = 5>15k+</option>
+				</select>
+				薪资：<input type="text" id="salary" />
+				<br /><br />
+				<input type="button" value="修改" onclick="updateStaff()" />
+				&nbsp;&nbsp;&nbsp;&nbsp;
+				<input type="button" value="取消" onclick="returnStaff()" />
+			</div>
+		</form>
+	</body>
+</html>

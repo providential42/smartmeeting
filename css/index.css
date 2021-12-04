@@ -1,0 +1,69 @@
+*{
+	margin:0px;    /*������Ϊ0*/
+	padding: 0px;  /*�ڼ���Ϊ0*/
+}
+a{
+	text-decoration: none;  /*ȥ��a��ǩ�ı��»���*/
+}
+a:hover{
+	cursor:pointer;  /*������������a��ǩ��ʱ����ʾС��ͼ��*/
+}
+body{
+	overflow: hidden;
+}
+header{
+	height: 44px;
+	background-color: #F7819F;
+}
+.headerRight{
+	float: right;
+	width: 550px;
+	height: 100%;
+	color: #f1f1f1;
+	line-height: 44px;
+	font-size: 14px;
+}
+.headerRight a{
+	color: #f1f1f1;
+	font-weight: bold;
+}
+.left {
+    height: 650px;
+    background: #003c58;
+}
+.menu{
+	margin-top: 20px;
+}
+.menu li{
+	list-style: none;
+	height: 30px;
+	width:100%;
+	text-align: center;
+	line-height: 30px;
+	color:#cccccc;
+}
+.menu>li:hover{
+	background-color: #3BC5BB;
+	color:white;
+}
+.menu>li:hover>a{
+	color:white;
+	text-decoration: none;
+}
+.menu li>a{
+	color:#cccccc;
+}
+.sub-menu{
+	display: none;
+}
+.sub-menu a{
+	margin-right:65px;
+}
+.active>ul{
+	display: block;
+}
+.sub-menu a:hover{
+	text-decoration: none;
+}
+
+
