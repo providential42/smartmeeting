@@ -3,6 +3,7 @@
 	<head>
 		<meta charset="UTF-8">
 		<title></title>
+		<link rel="stylesheet" href="../css/staff.css" />		
 		<link rel="stylesheet" href="../css/common.css" />
 		<link rel="stylesheet" href="../js/bootstrap-3.4.1-dist/css/bootstrap.min.css" />
 		<link rel="stylesheet" href="../js/bootstrap-3.4.1-dist/css/demo.css" />
@@ -15,22 +16,22 @@
 		<div class="content">
 			<!--搜索区域-->
 			<form>
-				<div>
-					按姓名搜索：<input type="text" id="searchname" />
-	    			<input type="button" value="搜索"  onclick="showSearchList()"/>
+				<div style="color:#9f9496 ;" class="btnRen"  >
+					按姓名搜索：<input style="color:#9f9496 ;" class="btnRen"  type="text" id="searchname" />
+	    			<input class="btnRen" type="button" value="搜索"  onclick="showSearchList()"/>
 					&nbsp;&nbsp;&nbsp;&nbsp;
-					按部门搜索：<select id="searchdepid"></select>
-					<input type="button" value="搜索"  onclick="showSearchList1()"/>
+					按部门搜索：<select style="color:#9f9496 ;" class="btnRen"  id="searchdepid"></select>
+					<input class="btnRen" type="button" value="搜索"  onclick="showSearchList1()"/>
 				</div>
 			</form>
 		</div>
 		
 		
-		<div style="width: 95%;margin: 0 auto;">
+		<div style="width: 95%;margin: 0 auto; color:#9f9496;">
 		<!--表格区域，采用boostrap表格实现-->
-		<table class="table table-striped table-bordered table-hover table-condensed">
+		<table style="color:#9f9496"  class="table table-striped table-bordered table-hover table-condensed">
 		  <thead>
-		    <tr>
+		    <tr style="color:#9f9496" >
 		      <th><input type="checkbox" id="checkAll" onclick="checkAll();"/></th>
 		      <th>员工id</th>
 		      <th>姓名</th>
@@ -43,13 +44,13 @@
 			  <th>审批</th>
 		    </tr>
 		  </thead>
-		  <tbody id="staffList">
+		  <tbody  id="staffList">
 		  </tbody>
 		</table>
 		</div>
 		
 		<div>
-		  
+		  <img style="margin-left: 200px;" src="../img/热气球.png"/>
 		</div>
 		
 	</body>

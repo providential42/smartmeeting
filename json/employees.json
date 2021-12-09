@@ -13,7 +13,6 @@
 		  "status":"1",
 		  "tel":"010-800761",
 		  "party":"党员",
-		  "qqnum":"100801",
 		  "address":"北京市昌平区",
 		  "postcode":"100010",
 		  "birthday":"1997-09-08",
@@ -38,15 +37,14 @@
 		"status":"1",
 		"tel":"010-800761",
 		"party":"党员",
-		"qqnum":"100801",
 		"address":"北京市昌平区",
 		"postcode":"100010",
 		"birthday":"1997-09-08",
 		"race":"汉",
 		"remark":"无",
 		"depid":1,
-		"levelid":1,
-		"salary":4500
+		"levelid":2,
+		"salary":6000
 	},
 	{
 		"id":3,
@@ -62,7 +60,6 @@
 		"status":"1",
 		"tel":"010-800761",
 		"party":"党员",
-		"qqnum":"100801",
 		"address":"北京市昌平区",
 		"postcode":"100010",
 		"birthday":"1997-09-08",
@@ -86,15 +83,14 @@
 		"status":"0",
 		"tel":"010-800761",
 		"party":"党员",
-		"qqnum":"100801",
 		"address":"北京市昌平区",
 		"postcode":"100010",
 		"birthday":"1997-09-08",
 		"race":"汉",
 		"remark":"无",
 		"depid":1,
-		"levelid":1,
-		"salary":4500
+		"levelid":3,
+		"salary":9500
 	},
 	{
 		"id":5,
@@ -110,14 +106,13 @@
 		"status":"0",
 		"tel":"010-800761",
 		"party":"党员",
-		"qqnum":"100801",
 		"address":"北京市昌平区",
 		"postcode":"100010",
 		"birthday":"1997-09-08",
 		"race":"汉",
 		"remark":"无",
 		"depid":1,
-		"levelid":1,
-		"salary":4500
+		"levelid":4,
+		"salary":13000
 	}
 ]

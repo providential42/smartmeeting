@@ -12,6 +12,8 @@
 		<script type="text/javascript" src="js/index.js" ></script>
 		<script type="text/javascript" src="js/menu.js" ></script>
 		<script type="text/javascript" src="js/data.js" ></script>
+		<script type="text/javascript" src="js/login.js" ></script>
+		
 		<script>
 			//走进该页面,证明用户登陆成功
 			//为当前登录的用户兑现赋值
@@ -25,7 +27,6 @@
 					break;
 				}
 			}
-			alert(loginUser.name)
 		</script>
 	</head>
 	<body>
@@ -40,36 +41,76 @@
 			<!--头部右侧区域-->
 			<div class="headerRight">
 				<span id="loginSpan">欢迎登录，sunys</span>
-				<img style="margin-left:20px;" src="img/StatBar_time.gif" />
+				<img style="margin-left:20px;" src="img/时间.png" />
 				<!--展现当前系统时间区域-->
 				<span id="nowTime"></span>
 				&nbsp;&nbsp;&nbsp;&nbsp;
-				<a href="#">修改密码</a>
+				<img style="margin-left:5px;" src="img/update.png" />
+				<a href="#"onclick="showUpdate()">修改密码</a>
+				<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+								        <div class="modal-dialog" role="document">
+								            <div class="modal-content">
+								                <div class="modal-header">
+								                   <button type="button" class="close"  data-dismiss="modal" aria-label="Close"><span aria-hidden="true">x</span></button>
+													<h4 class="modal-title" id="myModalLabel" style="color:#000000">修改密码</h4>
+								                </div>
+								              
+												<form class="form-horizontal" style="color: #F7819F; margin:20px;">
+													<div class="form-group" >
+													 <label for="name" class="col-sm-3 control-label"> 当前密码：</label>
+													 <div class="col-sm-8">
+													  <input type="text" class="form-control" id="oldPwd" />
+													 </div> 
+													</div>
+												       <div class="form-group" >
+												        <label for="housenum" class="col-sm-3 control-label">新的密码：</label>
+												        <div class="col-sm-8">
+												         <input type="password" class="form-control" id="newPwd" /> 
+												        </div> 
+												       </div> 
+												       <div class="form-group" >
+												        <label for="name" class="col-sm-3 control-label"> 确认密码：</label>
+												        <div class="col-sm-8">
+												         <input type="password" class="form-control" id="newPwd1" />
+												        </div> 
+												       </div>
+												      
+												      </form>
+												
+												
+								                <div class="modal-footer">
+								                    <button type="button" class="btn btn-default" onclick="updatePwd()" style="color:#F7819F ;">提交</button>
+								                </div>
+								            </div>
+								        </div>
+								    </div>
 				&nbsp;&nbsp;
-				<a href="#">退出登录</a>
+				<img style="margin-left:0px;" src="img/不通过.png" />
+				<a href="#" onclick="closewindow()">退出登录</a>
 			</div>
 		</header>
 		
 		<!--首页主体部分，采用bootstrap栅格-->
 		<div class="container-fluid">    
 		    <div class="row">
+				
 		    	<!--左侧菜单栏区域，占位2列-->
-		        <div style=" margin:0;padding:0;" class="col-md-2 left">
+		        <div style=" margin:0;padding:0;box-shadow: 5px 5px 5px #dabcbc75;" class="col-md-2 left">
 		        	<!--菜单栏区域采用ul无序列表的形式-->
 			        <ul class="menu">
 			            <li class="active">
-			            	<a href="#" style="margin-right: 50px;">个人通知</a>
+			            	<a href="#" style="margin-right: 50px;border-bottom:1px solid ">个人通知</a>
 			            	<span class="glyphicon glyphicon-menu-right"></span>
-			            	<ul class="sub-menu">
-				               <li><a class="subactive" href="#">最新通知</a></li>
-				               <li><a href="#">我的预定</a></li>
-				               <li><a href="#">我的会议</a></li>
+			            	<ul style="background: rgb(222, 222, 222);"  class="sub-menu">
+				               <li><a class="subactive" href="#" id="messageSearch" onclick="messageSearch(loginUserId)">最新通知</a></li>
+				               <li><a href="#" id="myShedule" onclick="mySchedule(loginUserId)">我的预定</a></li>
+				               <li><a href="#" id="mySearch" onclick="mySearch(loginUserId)">我的会议</a></li>
 				            </ul>
 			            </li>
 			            <li>
-			            	<a href="#" style="margin-right: 50px;">人员管理</a>
+			            	<a href="#" style="margin-right: 50px;border-bottom:1px solid ">人员管理</a>
 			            	<span class="glyphicon glyphicon-menu-right"></span>
-			            	<ul class="sub-menu"> 
+			            	<ul style="background: rgb(222, 222, 222);" class="sub-menu"> 
 								<li><a href="#" id="deptSearch" onclick="deptSearch()">部门管理</a></li>				               
 								<li><a href="#" id="registerNew" onclick="registerNew()">员工注册</a></li>
 				                <li><a href="#" id="approveStaff " onclick="approveStaff()">注册审批</a></li>
@@ -77,18 +118,23 @@
 				            </ul>
 			            </li>
 			            <li>
-			            	<a href="#" style="margin-right: 50px;">会议预定</a>
+			            	<a href="#" style="margin-right: 50px;border-bottom:1px solid ">会议预定</a>
 			            	<span class="glyphicon glyphicon-menu-right"></span>
-			            	<ul class="sub-menu">
+			            	<ul style="background: rgb(222, 222, 222);"  class="sub-menu">
 				               <li><a href="#">添加会议室</a></li>
 				               <li><a href="#">查看会议室</a></li>
 							   <li><a href="#" id="preMeeting" onclick="preMeeting()">预定会议</a></li>				            
 				               <li><a href="#">搜索会议</a></li>
 				            </ul>
+							
 			            </li>
-			            
+			        <div>
+			        	<img style="width: 200px;height: 200px;" src="img/圣诞树.png" />
+			        </div>
 			        </ul>
-		        </div>
+					
+				</div>
+
 <!-- 以上内容是目录 -->		        
 		        <!--右侧主体区域，占位10列-->
 		        <div class="col-md-10 main" style="padding:0;">

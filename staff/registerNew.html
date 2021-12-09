@@ -3,52 +3,62 @@
 	<head>
 		<meta charset="UTF-8">
 		<title></title>
+		<link rel="stylesheet" href="../css/staff.css" />
+		<link rel="stylesheet" href="js/bootstrap-3.4.1-dist/css/bootstrap.min.css" />
 		<script type="text/javascript" src="../js/jquery-1.11.0.js" ></script>
 		<script type="text/javascript" src="../js/common.js" ></script>
 		<script type="text/javascript" src="../js/staff/registerNew.js" ></script>
+		<h2 style="color:#ff99b4 ;text-align:center ;"><img src="../img/热气球.png" width="30px" height="30px"/> 注册员工</h2>
 		
 	</head>
-	<body onload="body_load()">
-		<!--添加人员的form表单-->
-		<form>
-			<div style="margin:50px;">
-				姓 名：<input type="text" id="name" />
-				性 别：<input type="text" id="sex" />
-				民 族：<input type="text" id="race" />
-				<br /><br />
-				身份证：<input type="text" id="cardid" />
-				政治面貌：<input type="text" id="party" />
-				<br /><br />
-				学 历：<input type="text" id="education" /> 
-				专 业：<input type="text" id="speciality" />
-				<br /><br />
-				手机号（账号）：<input type="text" id="phone" /> 
-				密 码：<input type="text" id="password" />
-				<br /><br />
-				邮 箱：<input type="text" id="email" />
-				家庭电话：<input type="text" id="tel" />
-				<br /><br />
-				家庭住址：<input type="text" id="address" />
-				邮政编码：<input type="text" id="postcode" />
-				<br /><br />
-				Q Q 号：<input type="text" id="qqnum" />
-				生 日：<input type="text" id="birthday" />
-				<br /><br />
-				所属部门：<select id="depid">
+	<body onload="body_load()" style="background:#FFFFFF;" >
+	
+			<form  style="margin-top:20px;color: #9f9496;">	
+			<div style="text-align:center ;">
+				姓  名 &nbsp;<input class="txtCss" type="text" id="name" />				
+				<br /><brc />
+				性  别 &nbsp;<input class="txtCss"type="text" id="sex" />
+				<br /><brc />
+				民  族 &nbsp;<input class="txtCss"type="text" id="race" />
+				<br /><brc />
+				薪  资 &nbsp;<input class="txtCss"type="text" id="salary" />
+				<br /><brc />
+				生  日 &nbsp;<input class="txtCss"type="text" id="birthday" />
+				<br /><brc />
+				学  历 &nbsp;<input class="txtCss"type="text" id="education" /> 
+				<br /><brc />
+				专  业 &nbsp;<input class="txtCss"type="text" id="speciality" />
+				<br /><brc />
+				密  码 &nbsp;<input class="txtCss"type="text" id="password" />
+				<br /><brc />
+				邮  箱 &nbsp;<input class="txtCss"type="text" id="email" />
+				<br /><brc />
+				手机号  <input class="txtCss"type="text" id="phone" /> 
+				<br /><brc />
+				身份证  <input class="txtCss"type="text" id="cardid" />
+				<br /><brc />
+				政治面貌 <input class="txtCss"type="text" id="party" />
+				<br /><brc />
+				家庭电话 <input class="txtCss"type="text" id="tel" />
+				<br /><brc />
+				家庭住址 <input class="txtCss"type="text" id="address" />
+				<br /><brc />
+				邮政编码 <input class="txtCss"type="text" id="postcode" />
+				<br /><br/>
+				所属部门 <select style="color:#9f9496 ;" class="txtCss" id="depid">
 				</select>
-				所属薪资范围：<select id="levelid">
+				所属薪资范围：<select style="color:#9f9496 ;" class="txtCss" id="levelid">
 					<option value = 1>3k-5k</option>
 					<option value = 2>5k-8k</option>
 					<option value = 3>8k-12k</option>
 					<option value = 4>12k-15k</option>
 					<option value = 5>15k+</option>
-				</select>
-				薪资：<input type="text" id="salary" />
+				</select>				
 				<br /><br />
-				<input type="button" value="注册" onclick="saveStaff()" />
+				<input  class="btnRen" type="button" value="注册" onclick="saveStaff()" />
 				&nbsp;&nbsp;&nbsp;&nbsp;
-				<input type="reset" value="取消"  />
-			</div>
+				<input class="btnRen" type="reset" value="取消"  />
+			 </div>
 		</form>
 	</body>
 </html>

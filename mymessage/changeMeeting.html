@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<link rel="stylesheet" href="../css/common.css" />
+		<link rel="stylesheet" href="../js/bootstrap-3.4.1-dist/css/bootstrap.min.css" />
+		<link rel="stylesheet" href="../js/bootstrap-3.4.1-dist/css/demo.css" />
+		<link rel="stylesheet" href="../css/staff.css" />
+		<script type="text/javascript" src="../js/jquery-1.11.0.js" ></script>
+		<script type="text/javascript" src="../js/bootstrap-3.4.1-dist/js/bootstrap.min.js"></script>
+		<script type="text/javascript" src="../js/bootstrap-3.4.1-dist/js/paginathing.js" ></script>
+		<script type="text/javascript" src="../js/common.js" ></script>
+		<script type="text/javascript">
+			window.onload = function() {
+				var meetingJsonArray = window.parent.meetingJsonArray;
+				var meetingroomJsonArray = window.parent.meetingroomJsonArray;
+				var employeeJsonArray = window.parent.employeeJsonArray;
+			    what();
+			    function what(){
+					var id = getParam("id")
+					for(var i = 0 ;i<meetingJsonArray.length;i++){
+						var meeting = meetingJsonArray[i];
+						if(meeting != undefined && meeting.id == id){
+							break;
+						}
+					}
+					// alert(meeting.id);
+					$("#meetingTitle").val(meeting.title);
+					$("#meetingNum").val(meeting.num);
+					$("#meetingStarttime").val(meeting.starttime);
+					$("#meetingEndtime").val(meeting.endtime);
+					var meetingroomName=meetingroomJsonArray[0].name+"（位置"+meetingroomJsonArray[0].housenum+")";
+					for(var i=0;i<meetingroomJsonArray.length;i++){
+						if(meetingroomJsonArray[i].id==meeting.mid){
+							meetingroomName=meetingroomJsonArray[i].name+"（位置"+meetingroomJsonArray[i].housenum+")";
+							break;
+						}
+					}
+					$("#meetingRoom").val(meetingroomName);
+					$("#meetingSum").val(meeting.remark);
+					
+					var meetingLeader=employeeJsonArray[0].name;
+					for(var i=0;i<employeeJsonArray.length;i++){
+						if(employeeJsonArray[i].id==meeting.eid){
+							meetingLeader=employeeJsonArray[i].name;
+							break;
+						}
+					}
+					
+					var meetingPerson="发起人:"+meetingLeader+",与会人:";
+					for(var i=0;i<employeeJsonArray.length;i++){
+						if(meeting.participants.indexOf(employeeJsonArray[i].id)!=-1){
+							meetingPerson=meetingPerson+" "+employeeJsonArray[i].name;
+						}
+					}
+					$("#meetingPerson").val(meetingPerson);
+					
+			    };
+			}
+		</script>
+		<script type="text/javascript">
+			function confirm(){
+				var dname = $("#name").val();
+				var desc =$("#remark").val();
+				var meetingTitle=$("#meetingTitle").val();
+				var meetingNum=$("#meetingNum").val();
+				var meetingStarttime=$("#meetingStarttime").val();
+				var meetingEndtime=$("#meetingEndtime").val();
+				var meetingRoom=$("#meetingRoom").val();
+				var meetingSum=$("#meetingSum").val();
+				var meetingPerson=$("#meetingPerson").val();
+				var meetingJsonArray = window.parent.meetingJsonArray;
+				var id = getParam("id")
+				for(var i=0;i<meetingJsonArray.length;i++){
+					var meeting=meetingJsonArray[i];
+					if(meeting.id == id){
+						meeting.titl=meetingTitle;
+						meeting.num=meetingNum;
+						meeting.starttime=meetingStarttime;
+						meeting.endtime=meetingEndtime;
+						meeting.room=meetingRoom;
+						meeting.remark=meetingSum;
+						meeting.participants=meetingPerson;
+						alert("修改成功");
+						window.location.href="myMeetingMessage.html";
+					}
+				}
+			}
+			
+		</script>
+		
+	</head>
+	<body>
+		<div class="input-group input-group-lg">
+			<span class="input-group-addon"> 会议名称 </span>
+			<input type="text" class="form-control" id="meetingTitle" value="">
+		</div>
+		<div class="input-group input-group-lg">
+			<span class="input-group-addon"> 会议人数 </span>
+			<input type="text" class="form-control" id="meetingNum" value="">
+		</div>
+		<div class="input-group input-group-lg">
+			<span class="input-group-addon"> 会议房间 </span>
+			<input type="text" class="form-control" id="meetingRoom" value="">
+		</div>
+		<div class="input-group input-group-lg">
+			<span class="input-group-addon"> 会议概要 </span>
+			<input type="text" class="form-control" id="meetingSum" value="">
+		</div>
+		<div class="input-group input-group-lg">
+			<span class="input-group-addon"> 会议人员 </span>
+			<input type="text" class="form-control" id="meetingPerson" value="">
+		</div>
+		<div class="input-group input-group-lg">
+			<span class="input-group-addon">会议开始时间</span>
+			<input type="text" class="form-control" id="meetingStarttime" value="">
+		</div>
+		<div class="input-group input-group-lg">
+			<span class="input-group-addon">会议结束时间</span>
+			<input type="text" class="form-control" id="meetingEndtime" value="">
+		</div>
+		<p>
+		  <button type="button" class="btnRen" onclick="confirm()">确认</button>
+		</p>
+	</body>
+</html>
+
+

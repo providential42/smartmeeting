@@ -3,6 +3,7 @@
 	<head>
 		<meta charset="UTF-8">
 		<title></title>
+		<link rel="stylesheet" href="../css/staff.css" />
 		<link rel="stylesheet" href="../css/common.css" />
 		<link rel="stylesheet" href="../js/bootstrap-3.4.1-dist/css/bootstrap.min.css" />
 		<link rel="stylesheet" href="../js/bootstrap-3.4.1-dist/css/demo.css" />
@@ -10,25 +11,33 @@
 		<script type="text/javascript" src="../js/bootstrap-3.4.1-dist/js/bootstrap.min.js"></script>
 		<script type="text/javascript" src="../js/bootstrap-3.4.1-dist/js/paginathing.js" ></script>
 		<script type="text/javascript" src="../js/staff/staffList.js" ></script>
+		<script>
+			function toPie(){
+				window.location.href="employeeStatistics.html";
+			}
+		</script>
 	</head>
 	<body onload="body_load()">
-		<div class="content">
+		<div style="color:#9f9496" class="content">
 			<!--搜索区域-->
 			<form>
 				<div>
 					按姓名搜索：<input type="text" id="searchname" />
-	    			<input type="button" value="搜索"  onclick="showSearchList()"/>
+	    			<input class="btnRen" type="button" value="搜索"  onclick="showSearchList()"/>
 					&nbsp;&nbsp;&nbsp;&nbsp;
 					按部门搜索：<select id="searchdepid"></select>
-					<input type="button" value="搜索"  onclick="showSearchList1()"/>
+					<input class="btnRen" type="button" value="搜索"  onclick="showSearchList1()"/>
+					&nbsp;&nbsp;&nbsp;&nbsp;
+					<input class="btnRen" style="float: right;" type="button" value="薪资统计" onclick="toPie()"/>
 				</div>
+				<div></div>
 			</form>
 		</div>
 		
 		
 		<div style="width: 95%;margin: 0 auto;">
 		<!--表格区域，采用boostrap表格实现-->
-		<table class="table table-striped table-bordered table-hover table-condensed">
+		<table style="color:#9f9496" class="table table-striped table-bordered table-hover table-condensed">
 		  <thead>
 		    <tr>
 		      <th><input type="checkbox" id="checkAll" onclick="checkAll();"/></th>

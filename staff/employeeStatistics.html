@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="../js/Highcharts-6.1.4/code/highcharts.js"></script>
+		<script src="../js/Highcharts-6.1.4/code/modules/exporting.js"></script>
+		<script src="../js/Highcharts-6.1.4/code/modules/export-data.js"></script>
+	</head>
+	<body>
+		<div style="margin:50px;">
+			<div id="container" style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto"></div>
+			<script type="text/javascript">
+				var tjsj=[];  //统计数据
+				//得到薪资等级
+				var levelJsonArray = window.parent.levelJsonArray;
+				var employeeJsonArray = window.parent.employeeJsonArray;
+				var totalcount = 0;//代表所有员工数量
+				var count = 0;   //代表属于该薪资等级的员工数量
+				for(var i=0;i<levelJsonArray.length;i++){
+					var level = levelJsonArray[i];
+					if(level!= undefined){
+						for(var j=0;j<employeeJsonArray.length;j++){
+							var employee = employeeJsonArray[i];
+							if(employee!=undefined){
+								totalcount++;
+								if(employee.levelid == level.id){
+									count++;
+								}
+							}
+						}
+						//count累计员工数量,计算当前薪资所占比重
+						var y = count/totalcount;
+						var levelData ={"name":level.range,"y":y};
+						tjsj[i]=levelData;
+					}
+				}
+				
+				Highcharts.chart('container', {
+				    chart: {
+				        plotBackgroundColor: null,
+				        plotBorderWidth: null,
+				        plotShadow: false,
+				        type: 'pie'
+				    },
+				    title: {
+				        text: '员工薪资统计'
+				    },
+				    tooltip: {
+				        pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+				    },
+				    plotOptions: {
+				        pie: {
+				            allowPointSelect: true,
+				            cursor: 'pointer',
+				            dataLabels: {
+				                enabled: true,
+				                format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+				                style: {
+				                    color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+				                }
+				            }
+				        }
+				    },
+				    series: [{
+				        name: 'Brands',
+				        colorByPoint: true,
+				        data: tjsj
+				    }]
+				});
+			</script>
+		</div>
+	</body>
+</html>

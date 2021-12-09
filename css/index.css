@@ -29,7 +29,7 @@ header{
 }
 .left {
     height: 650px;
-    background: #003c58;
+    background: #f2dde252;
 }
 .menu{
 	margin-top: 20px;
@@ -40,10 +40,10 @@ header{
 	width:100%;
 	text-align: center;
 	line-height: 30px;
-	color:#cccccc;
+	color:#a2989b;
 }
 .menu>li:hover{
-	background-color: #3BC5BB;
+	background-color: #c5bbc3;
 	color:white;
 }
 .menu>li:hover>a{
@@ -51,7 +51,7 @@ header{
 	text-decoration: none;
 }
 .menu li>a{
-	color:#cccccc;
+	color:#937f88;
 }
 .sub-menu{
 	display: none;

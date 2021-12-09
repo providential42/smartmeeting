@@ -45,3 +45,12 @@ $.ajax({
  }
 });
 
+//初始化薪资等级列表
+var levelJsonArray;
+$.ajax({
+	url:"json/salaryLevel.json",
+	dataType:"json",
+	success:function(resp){
+		levelJsonArray = resp;
+ }
+});

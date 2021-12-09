@@ -1,0 +1,32 @@
+[
+	{
+		"id":1,
+		"range":"3k-5k",
+		"minsalary":"3000",
+		"maxsalary":"5000"
+	},
+	{
+		"id":2,
+		"range":"5k-8k",
+		"minsalary":"5000",
+		"maxsalary":"8000"
+	},
+	{
+		"id":3,
+		"range":"8k-12k",
+		"minsalary":"8000",
+		"maxsalary":"10000"
+	},
+	{
+		"id":4,
+		"range":"12k-15k",
+		"minsalary":"12000",
+		"maxsalary":"15000"
+	},
+	{
+		"id":5,
+		"range":"15k+",
+		"minsalary":"15000",
+		"maxsalary":"max"
+	}
+]

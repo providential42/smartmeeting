@@ -68,5 +68,14 @@ function login(){
 			}
 		}
 	}
-	$("#errorSpan").html("失败");
+	// $("#errorSpan").html("失败");
+}
+
+
+//退出
+function closewindow(){
+	window.opener = null; 
+	　　　　　window.open(' ', '_self', ' '); 
+	　　　　　window.close(); 
+	window.location.href = "login.html";
 }

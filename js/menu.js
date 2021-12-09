@@ -39,3 +39,71 @@ function approveStaff(){
 	//让id="myFrame"的链接指向到用户列表页面
 	$('#myFrame').attr('src', "staff/approveStaff.html");
 }
+
+//当点击个人通知时，触发的事件
+function messageSearch(loginUserId){
+	checkMenu("messageSearch");
+	//让id="myFrame"的链接指向到用户列表页面
+	// alert("log"+loginUserId)
+	$('#myFrame').attr('src', "mymessage/newMessage.html?loginUserId="+loginUserId);
+}
+
+//当点击我的预定时，触发的事件
+function mySearch(loginUserId){
+	checkMenu("mySearch");
+	//让id="myFrame"的链接指向到用户列表页面
+	// alert("log"+loginUserId)
+	$('#myFrame').attr('src', "mymessage/myMeetingMessage.html?loginUserId="+loginUserId);
+}
+
+//当点击我的预定时，触发的事件
+function mySchedule(loginUserId){
+	checkMenu("mySchedule");
+	//让id="myFrame"的链接指向到用户列表页面
+	// alert("log"+loginUserId)
+	$('#myFrame').attr('src', "mymessage/mySchedule.html?loginUserId="+loginUserId);
+}
+
+
+
+$(function () { $("[data-toggle='popover']").popover(); });
+
+function updatePwd(){
+	var oldPwd = $("#oldPwd").val();
+	var newPwd = $("#newPwd").val();
+	var newPwd1 = $("#newPwd1").val();
+	
+	if(loginUser.password == oldPwd && newPwd == newPwd1){
+		employeeJsonArray[loginUser.id-1].password = newPwd1;
+		alert("修改完毕！");
+		window.location.href = "login.html";
+	}
+	else if(newPwd=="")
+	{
+		alert("新密码不能为空！");
+	}
+	else if(newPwd1=="")
+	 {
+		 alert("确认密码不能为空！");
+	 }
+	 else if(newPwd!=newPwd1)
+	 {
+		 alert("新密码和确认密码必须一致！");
+	 }
+	 else if(oldPwd!=loginUser.password)
+	 {
+		 alert("当前密码有误！");
+	 }
+}
+
+function showUpdate(){
+ $('#myModal').modal();
+}
+
+//退出
+function closewindow(){
+	window.opener = null; 
+	　　　　　window.open(' ', '_self', ' '); 
+	　　　　　window.close(); 
+	window.location.href = "login.html";
+}
